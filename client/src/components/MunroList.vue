@@ -7,13 +7,14 @@
             <option v-for="(munro, index) in munros" :key="index" :value="munro">{{munro.name}}</option>
         </select>
         <MunroDetail v-if="selectedMunro" :munro="selectedMunro"/>
-        <MunroMap :munros="munros"/>
+        
     </div>
 </template>
 
 <script>
 import MunroDetail from "./MunroDetail"
-import MunroMap from "./MunroMap"
+
+
 export default {
     name: "munro_list",
     props: ['munros'],
@@ -23,8 +24,7 @@ export default {
         }
     },
     components: {
-        MunroDetail,
-        MunroMap
+        MunroDetail
     }
 }
 </script>

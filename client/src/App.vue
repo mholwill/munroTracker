@@ -2,11 +2,13 @@
   <div id="app">
     <h1>HELLO MUNROS</h1>
     <MunroList :munros="munros"/>
+    <MunroMap :munros="munros"/>
   </div>
 </template>
 
 <script>
 import MunroList from "./components/MunroList"
+import MunroMap from "./components/MunroMap"
 
 export default {
   name: 'App',
@@ -21,7 +23,8 @@ export default {
     .then(munros => this.munros = munros)
   },
   components: {
-    MunroList
+    MunroList,
+    MunroMap
   }
 }
 </script>
