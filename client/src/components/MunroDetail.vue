@@ -1,5 +1,5 @@
 <template>
-    <h1>YES!</h1>
+    <h1>{{munro.name}}</h1>
 </template>
 
 <script>
