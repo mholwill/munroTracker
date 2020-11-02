@@ -2,6 +2,8 @@
     <div id="map">
         <div v-if="selectedMunro">
             <h1>{{ this.selectedMunro.name }}</h1>
+            <h1>{{dropDownSelect.name}}</h1>
+            <button>Visited</button>
         </div>
         <l-map style="height: 500px, width: 500px" 
             :zoom="zoom" 
@@ -13,6 +15,7 @@
 </template>
 
 <script>
+import { eventBus } from '@/main';
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
@@ -27,10 +30,10 @@ Icon.Default.mergeOptions({
 
 export default {
     name: "munro-map",
-    props: ['munros'],
+    props: ['munros', 'dropDownSelect'],
     data () {
         return {
-            zoom:8,
+            zoom:7.5,
             url:'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             center: [56.788845, -4.3396],
             selectedMunro: null
@@ -51,8 +54,9 @@ export default {
 
 <style>
 #map {
-    height: 50vh;
-    margin: 0;
+    height: 70vh;
+    width: 80%;
+    margin: auto;
 }
 
 </style>
