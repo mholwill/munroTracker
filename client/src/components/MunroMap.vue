@@ -1,11 +1,12 @@
 <template>
     <div id="map">
         <h1>MAP</h1>
+        <h1>{{ this.selectedMunro }}</h1>
         <l-map style="height: 500px, width: 500px" 
             :zoom="zoom" 
             :center="center">
             <l-tile-layer :url="url"></l-tile-layer>
-            <l-marker v-for="(munro, index) in munros" :key="index" :lat-lng="[munro.latlng_lat, munro.latlng_lng]"></l-marker>
+            <l-marker v-for="(munro, index) in munros" :key="index" :lat-lng="[munro.latlng_lat, munro.latlng_lng]" @click="handleClick(munro)"></l-marker>
         </l-map>
     </div>
 </template>
@@ -30,15 +31,20 @@ export default {
         return {
             zoom:8,
             url:'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            center: [56.788845, -4.3396]
+            center: [56.788845, -4.3396],
+            selectedMunro: null
         }
     },
     components: {
         LMap, 
         LTileLayer, 
         LMarker
+    },
+    methods: {
+        handleClick: function(payload){
+            this.selectedMunro = payload
+        }
     }
-
 }
 </script>
 
