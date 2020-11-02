@@ -2,7 +2,6 @@
     <div id="map">
         <div v-if="selectedMunro">
             <h1>{{ this.selectedMunro.name }}</h1>
-            <h1>{{selectedMunroDropDown.name}}</h1>
             <button>Visited</button>
         </div>
         <l-map style="height: 500px, width: 500px" 
@@ -51,7 +50,7 @@ export default {
         }
     },
     mounted() {
-        eventBus.$on('drop-down-munro', payload => (this.selectedMunroDropDown = payload))
+        eventBus.$on('drop-down-munro', payload => (this.selectedMunro = payload))
     }
 }
 </script>
