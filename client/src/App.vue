@@ -1,15 +1,27 @@
 <template>
   <div id="app">
     <h1>HELLO MUNROS</h1>
+    <MunroList :munros="munros"/>
   </div>
 </template>
 
 <script>
+import MunroList from "./components/MunroList"
 
 export default {
   name: 'App',
+  data() {
+    return {
+      munros: []
+    }
+  },
+  mounted(){
+    fetch('https://munroapi.herokuapp.com/munros')
+    .then(res => res.json())
+    .then(munros => this.munros = munros)
+  },
   components: {
-    
+    MunroList
   }
 }
 </script>
