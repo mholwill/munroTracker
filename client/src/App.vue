@@ -2,7 +2,7 @@
   <div id="app">
     <h1>HELLO MUNROS</h1>
     <MunroList :munros="munros"/>
-    <MunroMap :munros="munros" :dropDownSelect="selectedMunroDropDown"/>
+    <MunroMap :munros="munros"/>
   </div>
 </template>
 
@@ -15,8 +15,8 @@ export default {
   name: 'App',
   data() {
     return {
-      munros: [],
-      selectedMunroDropDown: null
+      munros: []
+      // selectedMunroDropDown: null
     }
   },
   mounted(){
@@ -24,7 +24,6 @@ export default {
     .then(res => res.json())
     .then(munros => this.munros = munros)
 
-    eventBus.$on('drop-down-munro', payload => (this.selectedMunroDropDown = payload))
   },
   components: {
     MunroList,

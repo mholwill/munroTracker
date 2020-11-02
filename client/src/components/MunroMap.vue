@@ -2,7 +2,7 @@
     <div id="map">
         <div v-if="selectedMunro">
             <h1>{{ this.selectedMunro.name }}</h1>
-            <h1>{{dropDownSelect.name}}</h1>
+            <h1>{{selectedMunroDropDown.name}}</h1>
             <button>Visited</button>
         </div>
         <l-map style="height: 500px, width: 500px" 
@@ -36,7 +36,8 @@ export default {
             zoom:7.5,
             url:'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             center: [56.788845, -4.3396],
-            selectedMunro: null
+            selectedMunro: null,
+            selectedMunroDropDown: null
         }
     },
     components: {
@@ -48,6 +49,9 @@ export default {
         handleClick: function(munro){
             this.selectedMunro = munro
         }
+    },
+    mounted() {
+        eventBus.$on('drop-down-munro', payload => (this.selectedMunroDropDown = payload))
     }
 }
 </script>
