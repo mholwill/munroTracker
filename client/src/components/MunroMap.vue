@@ -1,7 +1,8 @@
 <template>
     <div id="map">
-        <h1>MAP</h1>
-        <h1>{{ this.selectedMunro }}</h1>
+        <div v-if="selectedMunro">
+            <h1>{{ this.selectedMunro.name }}</h1>
+        </div>
         <l-map style="height: 500px, width: 500px" 
             :zoom="zoom" 
             :center="center">
@@ -41,8 +42,8 @@ export default {
         LMarker
     },
     methods: {
-        handleClick: function(payload){
-            this.selectedMunro = payload
+        handleClick: function(munro){
+            this.selectedMunro = munro
         }
     }
 }
