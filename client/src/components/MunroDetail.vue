@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>{{ munro.name }}</h1>
+        <h1>{{munro.name}}</h1>
         <form action="submit">
             <label for="date"></label>
             <input type="date" name="date" id="date" v-model="date">
@@ -35,6 +35,7 @@ export default {
     props: ['munro'],
     data() {
         return {
+            munroName: '',
             date: '',
             show: false,
             params: {
@@ -66,6 +67,8 @@ export default {
             console.log(status);
             console.log('field: ' + field);
         }
+
+
 
     },
     components: {

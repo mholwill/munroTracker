@@ -1,6 +1,6 @@
 <template>
     <div id="map-container">
-        <MunroDetail v-if="selectedMunro" :munro="selectedMunro"></MunroDetail>
+        
         <l-map style="height: 500px, width: 500px" 
             :zoom="zoom" 
             :center="center">
@@ -12,7 +12,7 @@
 
 <script>
 import { eventBus } from '@/main';
-import MunroDetail from './MunroDetail'
+
 
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
@@ -48,18 +48,14 @@ export default {
     components: {
         LMap, 
         LTileLayer, 
-        LMarker,
-        MunroDetail
+        LMarker
+        
     },
     methods: {
         handleClick: function(munro){
             this.selectedMunro = munro
+            eventBus.$emit('clicked-munro', this.selectedMunro)
         }
-    },
-    mounted() {
-        eventBus.$on('drop-down-munro', payload => (this.selectedMunro = payload))
-
-
     }
 }
 </script>

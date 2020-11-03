@@ -2,12 +2,14 @@
   <div id="app">
     <h1>HELLO MUNROS</h1>
     <MunroList :munros="munros"/>
+    <MunroDetail v-if="selectedMunro" :munro="selectedMunro"></MunroDetail>
     <MunroMap :munros="munros"/>
   </div>
 </template>
 
 <script>
 import { eventBus } from '@/main';
+import MunroDetail from './components/MunroDetail'
 import MunroService from "@/services/MunroService";
 import MunroList from "./components/MunroList"
 import MunroMap from "./components/MunroMap"
@@ -17,9 +19,8 @@ export default {
   data() {
     return {
       munros: [],
-      visitedMunros: []
-
-      // selectedMunroDropDown: null
+      visitedMunros: [],
+      selectedMunro: null
     }
   },
   mounted(){
@@ -31,11 +32,16 @@ export default {
     .then(data => this.visitedMunros = data)
 
     eventBus.$on('munro-visit', payload => (this.selectedMunro = payload))
+
+    eventBus.$on('drop-down-munro', payload => (this.selectedMunro = payload))
+
+    eventBus.$on('clicked-munro', payload => (this.selectedMunro = payload))
     
   },
   components: {
     MunroList,
-    MunroMap
+    MunroMap,
+    MunroDetail
   }
 }
 </script>
