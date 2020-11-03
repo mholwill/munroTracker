@@ -8,6 +8,7 @@
 
 <script>
 import { eventBus } from '@/main';
+import MunroService from "@/services/MunroService";
 import MunroList from "./components/MunroList"
 import MunroMap from "./components/MunroMap"
 
@@ -15,7 +16,8 @@ export default {
   name: 'App',
   data() {
     return {
-      munros: []
+      munros: [],
+      visitedMunros: []
       // selectedMunroDropDown: null
     }
   },
@@ -24,6 +26,8 @@ export default {
     .then(res => res.json())
     .then(munros => this.munros = munros)
 
+    MunroService.getMunrosVisits()
+    .then(data => this.visitedMunros = data)
   },
   components: {
     MunroList,
