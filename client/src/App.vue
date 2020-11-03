@@ -31,11 +31,13 @@ export default {
     MunroService.getMunrosVisits()
     .then(data => this.visitedMunros = data)
 
-    eventBus.$on('munro-visit', payload => (this.selectedMunro = payload))
-
     eventBus.$on('drop-down-munro', payload => (this.selectedMunro = payload))
 
     eventBus.$on('clicked-munro', payload => (this.selectedMunro = payload))
+
+    eventBus.$on('munro-submit', payload => MunroService.addMunroVisit(payload))
+
+
     
   },
   components: {

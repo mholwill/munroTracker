@@ -2,10 +2,13 @@
     <section>
         <h1>{{munro.name}}</h1>
         <form v-on:submit.prevent="handleSubmit">
+
             <label for="date"></label>
             <input type="date" name="date" id="date" v-model="date">
+
             <label for="uploadPhoto"></label>
             <a class="btn" @click="toggleShow">Upload Image</a>
+
             <my-upload field="img"
                 @crop-success="cropSuccess"
                 @crop-upload-success="cropUploadSuccess"
@@ -14,11 +17,12 @@
                 v-model="show"
                 :width="300"
                 :height="300"
-                url="http://localhost:3000/api/munros/uploads "
+                url="@/assets/images"
                 :params="params"
                 :headers="headers"
                 img-format="png">
             </my-upload>
+
             <img :src="imgDataUrl">
             
             <input type="submit" name="submit" value="Save Visit">
@@ -35,7 +39,6 @@ export default {
     props: ['munro'],
     data() {
         return {
-            munroName: '',
             date: '',
             show: false,
             params: {
@@ -68,13 +71,15 @@ export default {
             console.log('field: ' + field);
         },
 
-        handleSubmit: () =>{
-            payload = {
+        handleSubmit() {
+            const payload = {
                 munroName: this.munro.name,
                 dateVisited: this.date,
                 image: this.imgDataUrl
             }
             eventBus.$emit('munro-submit', payload)
+            this.date = '',
+            this.imgDataUrl = ''
         }
 
 
