@@ -1,5 +1,5 @@
 <template>
-    <div id="map">
+    <div id="map-container">
         <div v-if="selectedMunro">
             <h1>{{ this.selectedMunro.name }}</h1>
             <button>Visited</button>
@@ -36,11 +36,11 @@ export default {
             url:'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             center: [56.788845, -4.3396],
             myIcon: L.icon({
-                iconUrl: 'my-icon.png',
-                iconSize: [38, 95],
+                iconUrl: '../assets/images/blue_pin.png',
+                iconSize: [30, 40],
                 iconAnchor: [22, 94],
                 popupAnchor: [-3, -76],
-                classname: ''
+                classname: 'blue_pin'
             }),
             selectedMunro: null,
             selectedMunroDropDown: null
@@ -63,10 +63,13 @@ export default {
 </script>
 
 <style>
-#map {
+#map-container {
     height: 70vh;
     width: 80%;
     margin: auto;
 }
+
+
+
 
 </style>
