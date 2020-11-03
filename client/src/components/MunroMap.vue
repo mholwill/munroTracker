@@ -8,7 +8,7 @@
             :zoom="zoom" 
             :center="center">
             <l-tile-layer :url="url"></l-tile-layer>
-            <l-marker v-for="(munro, index) in munros" :key="index" :lat-lng="[munro.latlng_lat, munro.latlng_lng]" @click="handleClick(munro)"></l-marker>
+            <l-marker v-for="(munro, index) in munros" :key="index" :lat-lng="[munro.latlng_lat, munro.latlng_lng]" :icon="myIcon" @click="handleClick(munro)"></l-marker>
         </l-map>
     </div>
 </template>
@@ -35,6 +35,13 @@ export default {
             zoom:7.5,
             url:'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             center: [56.788845, -4.3396],
+            myIcon: L.icon({
+                iconUrl: 'my-icon.png',
+                iconSize: [38, 95],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76],
+                classname: ''
+            }),
             selectedMunro: null,
             selectedMunroDropDown: null
         }
