@@ -1,9 +1,6 @@
 <template>
     <div id="map-container">
-        <div v-if="selectedMunro">
-            <h1>{{ this.selectedMunro.name }}</h1>
-            <button>Visited</button>
-        </div>
+        <MunroDetail v-if="selectedMunro" :munro="selectedMunro"></MunroDetail>
         <l-map style="height: 500px, width: 500px" 
             :zoom="zoom" 
             :center="center">
@@ -15,6 +12,8 @@
 
 <script>
 import { eventBus } from '@/main';
+import MunroDetail from './MunroDetail'
+
 import L from 'leaflet';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
@@ -29,7 +28,7 @@ Icon.Default.mergeOptions({
 
 export default {
     name: "munro-map",
-    props: ['munros', 'dropDownSelect'],
+    props: ['munros'],
     data () {
         return {
             zoom:7.5,
@@ -49,7 +48,8 @@ export default {
     components: {
         LMap, 
         LTileLayer, 
-        LMarker
+        LMarker,
+        MunroDetail
     },
     methods: {
         handleClick: function(munro){
@@ -58,6 +58,8 @@ export default {
     },
     mounted() {
         eventBus.$on('drop-down-munro', payload => (this.selectedMunro = payload))
+
+
     }
 }
 </script>

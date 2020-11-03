@@ -18,6 +18,7 @@ export default {
     return {
       munros: [],
       visitedMunros: []
+
       // selectedMunroDropDown: null
     }
   },
@@ -28,6 +29,9 @@ export default {
 
     MunroService.getMunrosVisits()
     .then(data => this.visitedMunros = data)
+
+    eventBus.$on('munro-visit', payload => (this.selectedMunro = payload))
+    
   },
   components: {
     MunroList,
