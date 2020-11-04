@@ -1,15 +1,17 @@
 <template>
     <section>
         <h1>{{munro.name}}</h1>
+        <h3>Region: {{ munro.region}}</h3>
         <form v-on:submit.prevent="handleSubmit">
 
             <label for="date"></label>
             <input type="date" name="date" id="date" v-model="date">
 
             <label for="uploadPhoto"></label>
-            <a class="btn" @click="toggleShow">Upload Image</a>
 
-            <my-upload field="img"
+            <!-- <a class="btn" @click="toggleShow">Upload Image</a> -->
+            
+            <!-- <my-upload field="img"
                 @crop-success="cropSuccess"
                 @crop-upload-success="cropUploadSuccess"
                 @crop-upload-fail="cropUploadFail"
@@ -17,21 +19,22 @@
                 v-model="show"
                 :width="300"
                 :height="300"
-                url="@/assets/images"
+                url="http://localhost:3000/api/munros/uploads "
                 :params="params"
                 :headers="headers"
                 img-format="png">
             </my-upload>
-
-            <img :src="imgDataUrl">
+            <img :src="imgDataUrl"> -->
             
             <input type="submit" name="submit" value="Save Visit">
         </form>
+        <IndividualMunroMap :munro="munro"/>
     </section>
 </template>
 
 <script>
 import {eventBus} from '@/main.js'
+import IndividualMunroMap from './IndividualMunroMap'
 import myUpload from 'vue-image-crop-upload';
 
 export default {
@@ -86,7 +89,8 @@ export default {
 
     },
     components: {
-        'my-upload': myUpload
+        'my-upload': myUpload,
+        IndividualMunroMap
     }
 }
 </script>

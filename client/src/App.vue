@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <h1>HELLO MUNROS</h1>
+    <h1>MUNRO TRACKER</h1>
     <MunroList :munros="munros"/>
+    
     <MunroDetail v-if="selectedMunro" :munro="selectedMunro"></MunroDetail>
-    <MunroMap :munros="munros"/>
+
+    
+    <MunroMap v-if="!selectedMunro" :munros="munros"/>
   </div>
 </template>
 
