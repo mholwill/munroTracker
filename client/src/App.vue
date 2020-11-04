@@ -1,21 +1,23 @@
 <template>
   <div id="app">
     <h1>MUNRO TRACKER</h1>
-    <MunroList :munros="munros"/>
-    
+    <MunroList :munros="munros"></MunroList>
     <MunroDetail v-if="selectedMunro" :munro="selectedMunro"></MunroDetail>
-
-    
+  
     <MunroMap v-if="!selectedMunro" :munros="munros"/>
+    <VisitedMunros :visitedMunros="visitedMunros"/>
+    
   </div>
 </template>
 
 <script>
 import { eventBus } from '@/main';
-import MunroDetail from './components/MunroDetail'
-import MunroService from "@/services/MunroService";
-import MunroList from "./components/MunroList"
-import MunroMap from "./components/MunroMap"
+import VueGallery from 'vue-gallery'
+import MunroDetail from './components/MunroDetail';
+import MunroService from '@/services/MunroService';
+import MunroList from './components/MunroList';
+import MunroMap from './components/MunroMap';
+import VisitedMunros from './components/VisitedMunros';
 
 export default {
   name: 'App',
@@ -34,7 +36,10 @@ export default {
     MunroService.getMunrosVisits()
     .then(data => this.visitedMunros = data)
 
-    eventBus.$on('drop-down-munro', payload => (this.selectedMunro = payload))
+    eventBus.$on('drop-down-munro', (payload) => {
+      this.selectedMunro = payload
+      this.index = true
+    })
 
     eventBus.$on('clicked-munro', payload => (this.selectedMunro = payload))
 
@@ -46,7 +51,8 @@ export default {
   components: {
     MunroList,
     MunroMap,
-    MunroDetail
+    MunroDetail,
+    VisitedMunros,
   }
 }
 </script>
